@@ -5,7 +5,7 @@ namespace App\Domains\Users\Models\Database\Migrations;
 use App\Support\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-return new class extends Migration
+class CreatePasswordResetTokensTable extends Migration
 {
     /**
      * Run the migrations.

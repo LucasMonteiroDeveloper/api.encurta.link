@@ -12,7 +12,7 @@ class MigrationServiceProvider extends ServiceProvider
     
     public function register()
     {
-        $this->migrations([
+        $this->Migrations([
             Migrations\CreateUsersTable::class,
             Migrations\createPasswordResetTokensTable::class,
         ]);

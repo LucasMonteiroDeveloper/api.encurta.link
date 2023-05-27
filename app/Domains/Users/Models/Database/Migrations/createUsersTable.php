@@ -5,7 +5,7 @@ namespace App\Domains\Users\Models\Database\Migrations;
 use App\Support\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-return new class extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ return new class extends Migration
         $this->schema->create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();$this->schema->
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

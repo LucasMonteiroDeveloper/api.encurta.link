@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa322c53454393ed775cfe4807d54a50",
+    "content-hash": "ea7c1ed8dcacbcc39515896564c81b51",
     "packages": [
+        {
+            "name": "artesaos/migrator",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artesaos/migrator.git",
+                "reference": "98ace9c4670076e4576103705b1c38dddd6c55ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artesaos/migrator/zipball/98ace9c4670076e4576103705b1c38dddd6c55ce",
+                "reference": "98ace9c4670076e4576103705b1c38dddd6c55ce",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Migrator\\MigrationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Migrator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Diego Hernandes",
+                    "email": "diego@hernandev.com"
+                }
+            ],
+            "description": "Namespaced Migrations for Laravel 5.1+",
+            "support": {
+                "issues": "https://github.com/artesaos/migrator/issues",
+                "source": "https://github.com/artesaos/migrator/tree/master"
+            },
+            "time": "2018-10-03T01:31:12+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",

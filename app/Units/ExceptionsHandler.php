@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Units\Exceptions;
+namespace App\Units;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler;
 use Throwable;
 
-class Handler extends ExceptionHandler
+class ExceptionsHandler extends Handler
 {
     /**
      * The list of the inputs that are never flashed to the session on validation exceptions.

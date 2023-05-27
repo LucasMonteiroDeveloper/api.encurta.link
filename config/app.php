@@ -169,11 +169,14 @@ return [
         App\Units\Providers\AuthServiceProvider::class,
         // App\Units\Providers\BroadcastServiceProvider::class,
         App\Units\Providers\EventServiceProvider::class,
-        App\Units\Providers\RouteServiceProvider::class,
 
         //Domains
         App\Domains\Users\Models\Providers\MigrationServiceProvider::class,
         App\Domains\Links\Providers\MigrationServiceProvider::class,
+
+        //Units
+        App\Units\Links\Providers\RouteServiceProvider::class,
+        App\Units\Users\Providers\RouteServiceProvider::class,
     ])->toArray(),
 
     /*

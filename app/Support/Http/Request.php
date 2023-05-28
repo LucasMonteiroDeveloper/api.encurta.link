@@ -2,7 +2,7 @@
 
 namespace App\Support\Http;
 
-use Illuminate\Foudation\Http\FormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
 abstract class Request extends FormRequest
 {

@@ -48,8 +48,17 @@ class User extends Model implements
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function customJWTClaims()
+    {
+        return [
+            'email' => $this->email,
+            'name' => $this->name,
+        ];
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
 }

@@ -175,6 +175,7 @@ return [
         App\Domains\Links\Providers\MigrationServiceProvider::class,
 
         //Units
+        App\Units\Auth\Providers\RouteServiceProvider::class,
         App\Units\Links\Providers\RouteServiceProvider::class,
         App\Units\Users\Providers\RouteServiceProvider::class,
     ])->toArray(),

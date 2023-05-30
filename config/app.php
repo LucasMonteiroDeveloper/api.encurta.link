@@ -162,6 +162,9 @@ return [
 
         Migrator\MigrationServiceProvider::class,
 
+        //Support
+        App\Support\Hash\IdServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

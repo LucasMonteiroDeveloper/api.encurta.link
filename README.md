@@ -2,58 +2,98 @@
 
 ## Sobre o Projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O encurtamento de Link é uma prática usada para transformar uma URL longa em um link muito mais curto e de fácil memorização. Sendo ideal para utilização em divulgação de links em redes sociais e envios de mensagens SMS.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O api.encurta.link conta com um sofisticado e robusto sistema de encurtamento de URL. Foi desenvolvido em PHP , Laravel e Vue.js.
+Assim como <b>Hashids</b> para  gerar IDs semelhantes ao YouTube a partir de números.
+> Os hashids requerem uma extensão <a href="https://www.php.net/manual/en/book.bc.php">bcmathou</a> ou <a href="https://www.php.net/manual/en/book.gmp.php">gmppara</a> funcionar.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Com um painel de monitoramento, onde é possível acompanhar quantos cliques seus links estão recebendo.
 
-## Learning Laravel
+## Começando
+Exija esse pacote no diretório raiz do seu projeto.
+```
+gh repo clone LucasMonteiroDeveloper/api.encurta.link
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Para rodar os Migrates, use o comando:
+```ruby
+php artisan migrator
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Armadilhas
+Ao decodificar, a saída é sempre uma matriz de números (mesmo se você codificou apenas um número):<br><br/>
+<b>Possivéis erros são, erro na autenticação de usuário.</b> Refaça os passos e tente novamente.
 
-## Laravel Sponsors
+Você também pode fazer isso manualmente com um Api Cliente...
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Consumindo a API com um Api Cliente
 
-### Premium Partners
+Com o metódo <code>POST</code> utilize as seguintes execuções
+```
+http://127.0.0.1:8000/links
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Insira um Link manualmente editando o <b>Body</b> da request, em formato <code>JSON</code>
+```ruby
+{
+    "url": "https://google.com"
+}
+```
 
-## Contributing
+Agora Adicione um <b>Usuário</b> do mesmo jeito.
+```
+http://127.0.0.1:8000/users
+```
+- Alterando o body
+```ruby
+{
+    "name": "Isabele teste Autenticação",
+    "email": "teste@teste.com",
+    "password": "123456"
+}
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<h3>Autenticando Usuário:</h3>
+Agora a autenticação é bem simples, vamos usar o seguinte comando:
 
-## Code of Conduct
+```
+http://127.0.0.1:8000/auth/login
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Ponto de atenção aqui, para autenticar o usuário você deve passar o mesmo <b>Email</b> e <b>Senha</b> que foi utilizando ao inserir o usuário.
 
-## Security Vulnerabilities
+```ruby
+ {
+    "email": "teste@teste.com",
+    "password": "123456"
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+A sua <b>Saída</b> será um <code>Token</code> igual a esse <code>eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IkNGb1dYY3hqQnRkT0hETnQifQ.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMCIsInN1YiI6IjEiLCJqdGkiOiJDRm9XWGN4akJ0ZE9IRE50IiwiaWF0IjoxNjg1NDIwODI3LCJuYmYiOjE2ODU0MjA4MjcsImV4cCI6MTY4NTQyNDQyNywicmxpIjoxNjg1ODU2NDI3LCJlbWFpbCI6Im1vbnRlaXJvLmRsdWNhc0BnbWFpbC5jb20iLCJuYW1lIjoiTHVjYXMgTW9udGVpcm8ifQ.HhTeK2dnHEfqRyc_BXcPcNmwx3bdiJ_YsS8vZmHKuyE</code>
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Autenticação:
+```
+http://127.0.0.1:8000/auth/refresh
+```
+
+Adicone uma <code>key = Authorization</code> e um value com o prefixo <code>Bearer</code> seguido do token gerado. Ficando assim <code>Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IkNGb1dYY3hqQnRkT0hETnQifQ.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMCIsInN1YiI6IjEiLCJqdGkiOiJDRm9XWGN4akJ0ZE9IRE50IiwiaWF0IjoxNjg1NDIwODI3LCJuYmYiOjE2ODU0MjA4MjcsImV4cCI6MTY4NTQyNDQyNywicmxpIjoxNjg1ODU2NDI3LCJlbWFpbCI6Im1vbnRlaXJvLmRsdWNhc0BnbWFpbC5jb20iLCJuYW1lIjoiTHVjYXMgTW9udGVpcm8ifQ.HhTeK2dnHEfqRyc_BXcPcNmwx3bdiJ_YsS8vZmHKuyE</code>
+
+
+- Pegando a URL encurtada
+method <code>GET</code> 
+```
+http://127.0.0.1:8000/links/1
+```
+o '1' iz a posição do link cadastrado, se você cadastrar outro link, depois de seguir esses passos e quiser gerar o encurtador, basta usar a posição '2' e assim sucessivamente
+
+Isso vai gerar a sua URL encurtada!
+
+
+
+
+
+
+

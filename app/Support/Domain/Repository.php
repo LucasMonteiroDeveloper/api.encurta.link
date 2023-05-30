@@ -5,30 +5,52 @@ namespace App\Support\Domain;
 abstract class Repository
 {
     protected $modelClass;
+    protected $userOnly = false;
 
-    public function makeModel()
+    public function newQuery()
     {
-        return $this->model = app()->make($this->modelClass);
+        $query = app()->make($this->modelClass)->newQuery();
+
+        if ($this->userOnly) {
+            $query->where('user_id', auth()->user()->id);
+        }
+
+        return $query;
     }
 
-    public function all()
+    public function userOnly($userOnly = false)
     {
-        $model = $this->makeModel();
+        $this->userOnly = $userOnly;
 
-        return $this->model->get();
+        return $this;
     }
 
-    public function find($id)
+    public function getAll()
     {
-        $model = $this->makeModel();
+        $model = $this->newQuery();
 
-        return $this->find($id);
+        return $model->get();
+    }
+
+    public function findId($id)
+    {
+        $model = $this->newQuery();
+
+        return $model->find($id);
+    }
+
+    public function factory(array $data)
+    {
+        $model = $this->newQuery()->getModel()->newInstance();
+
+        $model->fill($data);
+
+        return $model;
     }
 
     public function create(array $data = [])
     {
-        $model = $this->makeModel();
-        $model->fill($data);
+        $model = $this->factory($data);
 
         $model->save();
 

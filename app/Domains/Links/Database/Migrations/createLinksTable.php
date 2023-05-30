@@ -14,9 +14,10 @@ class CreateLinksTable extends Migration
     {
         $this->schema->create('links', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('url');
             $table->string('slug')->nullable();
+            $table->bigInteger('clicks')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateLinksTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('links');
+        $this->schema->dropIfExists('links');
     }
 };

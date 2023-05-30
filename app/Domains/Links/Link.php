@@ -9,6 +9,5 @@ class Link extends UserModel
 {
     public $fillable = [
         'url',
-        'slug'
     ];
 }

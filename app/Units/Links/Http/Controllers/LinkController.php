@@ -7,20 +7,27 @@ use Illuminate\Http\Request;
 use App\Support\Http\Controller;
 use App\Units\Links\Http\Requests\CreateLinkRequest;
 use App\Domains\Links\Link;
-use App\Domains\Users\Models\User;
 use App\Domains\Links\Repositories\LinkRepository;
 
 class LinkController extends Controller
 {
-    public function __construct()
+    public function index(LinkRepository $repository)
     {
-        $user = User::first();
-        \Auth::login($user);
+        $links = $repository->userOnly(true)->getAll();
+
+        return $this->respond->ok($links);
     }
 
-    public function index()
+    public function show($id, LinkRepository $repository)
     {
-        return Link::all();
+        $link = $repository->findId($id);
+        $repository->doClick($link);
+
+        if (!$link) {
+            return $this->respond->notFound('Link não foi encontrado');
+        }
+
+        return $this->respond->ok($link);
     }
 
     public function store(CreateLinkRequest $request, LinkRepository $repository)
@@ -29,9 +36,9 @@ class LinkController extends Controller
         $link = $repository->create($data);
 
         if ($link) {
-            return response()->json($link);
+            return $this->respond->ok($link);
         }
 
-        return response()->json('Falha', 404);
+        return $this->respond->error('Ocorreu algum erro interno');
     }
 }

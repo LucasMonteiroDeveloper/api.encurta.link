@@ -13,7 +13,7 @@ class UserRepository extends Repository
     {
         $newData = $data;
         if (isset($newData['password'])) {
-            $newData['password'] = bcrypt($newData['password']);
+            $newData['password'] = $newData['password'];
         }
 
         return parent::create($newData);
@@ -23,7 +23,7 @@ class UserRepository extends Repository
     {
         $newData = $data;
         if (isset($newData['password'])) {
-            $newData['password'] = bcrypt($newData['password']);
+            $newData['password'] = $newData['password'];
         }
 
         return parent::update($model, $newData);
